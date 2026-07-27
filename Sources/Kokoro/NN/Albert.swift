@@ -31,7 +31,7 @@ final class AlbertEmbeddings: Module {
     func callAsFunction(_ inputIDs: MLXArray, tokenTypeIDs: MLXArray? = nil) -> MLXArray {
         let batch = inputIDs.dim(0)
         let length = inputIDs.dim(1)
-        let positions = broadcast(MLXArray.arange(length), to: [batch, length])
+        let positions = broadcast(MLXArray((0 ..< length).map { Int32($0) }), to: [batch, length])
         let tokenTypes = tokenTypeIDs ?? MLXArray.zeros([batch, length], dtype: .int32)
         let embeddings = wordEmbeddings(inputIDs)
             + positionEmbeddings(positions)
