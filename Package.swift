@@ -14,14 +14,14 @@ let package = Package(
         .executable(name: "KokoroCLI", targets: ["KokoroCLI"]),
     ],
     dependencies: [
-        .package(path: "Packages/Misaki"),
+        .package(url: "https://github.com/SeamusWaldron/misaki", from: "0.1.0"),
         .package(url: "https://github.com/ml-explore/mlx-swift.git", from: "0.29.1")
     ],
     targets: [
         .target(
             name: "Kokoro",
             dependencies: [
-                .product(name: "Misaki", package: "Misaki"),
+                .product(name: "Misaki", package: "misaki"),
                 .product(name: "MLX", package: "mlx-swift"),
                 .product(name: "MLXFast", package: "mlx-swift"),
                 .product(name: "MLXNN", package: "mlx-swift"),
@@ -35,7 +35,7 @@ let package = Package(
             name: "KokoroTests",
             dependencies: [
                 "Kokoro",
-                .product(name: "Misaki", package: "Misaki"),
+                .product(name: "Misaki", package: "misaki"),
             ]
         ),
     ]
